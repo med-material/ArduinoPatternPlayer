@@ -3,9 +3,9 @@
 //Create PatternPlayers (one for each output pin you need)
 //PatternPlayer name(pin);
 
-PatternPlayer myLED0(10);
-PatternPlayer myLED1(11);
-PatternPlayer myLED2(13);
+PatternPlayer myLED0(3);
+PatternPlayer myLED1(5);
+PatternPlayer myLED2(6);
 
 //Define patterns like this:
 //Pattern patternName(
@@ -46,7 +46,7 @@ PatternPlayer PlayerList[] = {myLED0, myLED1, myLED2};
 
 void setup() {
   //As an example input, I use a button on pin 7 that pulls the pin to ground when pressed
-  pinMode(7, INPUT_PULLUP);
+  pinMode(2, INPUT_PULLUP);
   Serial.begin(115200);
   Serial.println(PatternListSize);
 }
