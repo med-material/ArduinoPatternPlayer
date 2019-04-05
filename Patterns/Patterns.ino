@@ -1,5 +1,7 @@
 #include "PatternPlayer.h"
 
+int ButtonPin = 2;
+
 //Create PatternPlayers (one for each output pin you need)
 //PatternPlayer name(pin);
 
@@ -46,7 +48,7 @@ PatternPlayer PlayerList[] = {myLED0, myLED1, myLED2};
 
 void setup() {
   //As an example input, I use a button on pin 7 that pulls the pin to ground when pressed
-  pinMode(2, INPUT_PULLUP);
+  pinMode(ButtonPin, INPUT_PULLUP);
   Serial.begin(115200);
   Serial.println(PatternListSize);
 }
@@ -59,19 +61,19 @@ void loop() {
     myLED2.loop();
 
     //Example of how to play a pattern (in this case when a button on pin 7 is pressed)
-    if(!digitalRead(7))
+    if(digitalRead(ButtonPin))
       myLED0.playPattern(threeBlinksFade, true); //the 'true' indicates that the pattern should fade between intensities (requires a PWM pin)
       
     
     //patternPlayer.playPattern(Pattern pattern, bool fade, int repeat). fade and repeat are optinal. repeat specifices how many times the pattern should repeat after the first 
 
     //it is also possible to only activate a pattern if none is currently playing (not fading + repeating twice):
-    if(!digitalRead(7) && !myLED1.playing)
+    if(digitalRead(ButtonPin) && !myLED1.playing)
       myLED1.playPattern(twoBlinks, false, 2); 
 
 
     //You can also use one (or more) pattern lists to easily play many different patterns (e.g. from Unity by just sending an interger/index over serial)
-    if(!digitalRead(7) && !myLED2.playing)
+    if(digitalRead(ButtonPin) && !myLED2.playing)
       myLED2.playPattern(PatternList[index++], false); 
     
     if(index == PatternListSize)
